@@ -2,6 +2,34 @@ schema {
   query: Query
 }
 
+type Group {
+  id: ID!
+  title: String!
+  member: [Author]!
+}
+
+type Author {
+  id: ID!
+  name: String!
+  profile_image: String
+  groups: [ID]
+}
+
+type TWL {
+  group_id: ID!
+  id: ID!
+  date: String!
+  createdAt: String!
+  modifiedAt: String
+  author: Author!
+  contents: [Content]
+}
+
+type Content {
+  twl_id: ID!
+  text: String!
+}
+
 type Query {
   hello: String!
 }
