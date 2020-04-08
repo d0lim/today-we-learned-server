@@ -30,16 +30,35 @@ type TWL struct {
 
 // Content schema struct
 type Content struct {
-	TWLID  graphql.ID
-	ID     graphql.ID
-	Author Author
-	Text   string
+	TWLID graphql.ID
+	ID    graphql.ID
+	Text  string
 }
 
 var groups = []Group{
 	Group{
 		ID:    "0",
 		Title: "Study",
+		Member: []Author{
+			authors[0],
+			authors[1],
+		},
+	},
+	Group{
+		ID:    "1",
+		Title: "Exercise",
+		Member: []Author{
+			authors[0],
+			authors[2],
+		},
+	},
+	Group{
+		ID:    "2",
+		Title: "Music",
+		Member: []Author{
+			authors[1],
+			authors[2],
+		},
 	},
 }
 
@@ -49,9 +68,34 @@ var authors = []Author{
 		Name:         "DoLim",
 		ProfileImage: "https://api.adorable.io/avatars/285/dolim",
 	},
+	Author{
+		ID:           "1",
+		Name:         "HM",
+		ProfileImage: "https://api.adorable.io/avatars/285/dolim",
+	},
+	Author{
+		ID:           "2",
+		Name:         "Bazinga",
+		ProfileImage: "https://api.adorable.io/avatars/285/dolim",
+	},
 }
-var twls []TWL = make([]TWL, 0)
-var contents []Content = make([]Content, 0)
+var twls = []TWL{
+	TWL{
+		ID:         "0",
+		GroupID:    "0",
+		Date:       "2020-04-08",
+		CreatedAt:  "2020-04-08",
+		ModifiedAt: "2020-04-08",
+		Author:     authors[0],
+	},
+}
+var contents = []Content{
+	Content{
+		TWLID: "0",
+		ID:    "0",
+		Text:  "First content of twl",
+	},
+}
 
 func init() {
 
