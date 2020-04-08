@@ -27,9 +27,18 @@ type TWL {
 
 type Content {
   twl_id: ID!
+  id: ID!
+  author: Author!
   text: String!
 }
 
 type Query {
-  hello: String!
+  twls(group_id: ID!, date: String, createdAt: String, modifiedAt: String, author: Author): [TWL]
+  twl(twl_id: ID!): TWL!
+  authors(group_id: ID!): [Author]!
+  author(author_id: ID!): Author!
+  groups(title: String): [Group]
+  group(group_id: ID!): Group!
+  contents(twl_id: ID!): [Content]
+  content(content_id: ID!): Content!
 }
