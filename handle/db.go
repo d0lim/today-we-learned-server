@@ -42,7 +42,14 @@ var groups = []Group{
 		Title: "Study",
 	},
 }
-var authors []Author = make([]Author, 0)
+
+var authors = []Author{
+	Author{
+		ID:           "0",
+		Name:         "DoLim",
+		ProfileImage: "https://api.adorable.io/avatars/285/dolim",
+	},
+}
 var twls []TWL = make([]TWL, 0)
 var contents []Content = make([]Content, 0)
 
