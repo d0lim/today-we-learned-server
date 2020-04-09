@@ -5,30 +5,31 @@ schema {
 type Group {
   id: ID!
   title: String!
-  member: [Author]!
+  description: String!
+  member: [Author]
+  twls: [TWL]
 }
 
 type Author {
   id: ID!
   name: String!
   profile_image: String
-  groups: [ID]
+  groups: [Group]
 }
 
 type TWL {
-  group_id: ID!
   id: ID!
+  group_id: ID!
   date: String!
-  createdAt: String!
-  modifiedAt: String
-  author: Author!
   contents: [Content]
 }
 
 type Content {
-  twl_id: ID!
   id: ID!
-  author: Author!
+  twl_id: ID!
+  author_id: ID!
+  createdAt: String!
+  modifiedAt: String!
   text: String!
 }
 
