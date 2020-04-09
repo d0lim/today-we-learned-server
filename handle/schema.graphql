@@ -34,7 +34,7 @@ type Content {
 }
 
 type Query {
-  twls(group_id: ID!, date: String, createdAt: String, modifiedAt: String, author: Author): [TWL]
+  twls(group_id: ID!): [TWL]
   twl(twl_id: ID!): TWL!
   authors(group_id: ID!): [Author]!
   author(author_id: ID!): Author!
