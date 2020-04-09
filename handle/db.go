@@ -20,6 +20,7 @@ type Group struct {
 	Title       string
 	Description string
 	Member      []AuthorID
+	TWLs        []TWLID
 }
 
 // Author schema struct
@@ -35,16 +36,16 @@ type TWL struct {
 	ID       TWLID
 	GroupID  GroupID
 	Date     string
-	Contents []Content
+	Contents []ContentID
 }
 
 // Content schema struct
 type Content struct {
 	ID         ContentID
 	TWLID      TWLID
+	AuthorID   AuthorID
 	CreatedAt  string
 	ModifiedAt string
-	AuthorID   AuthorID
 	Text       string
 }
 
