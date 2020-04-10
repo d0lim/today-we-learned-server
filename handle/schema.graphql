@@ -36,7 +36,7 @@ type Content {
 type Query {
   twls(group_id: ID!): [TWL]
   twl(twl_id: ID!): TWL!
-  authors(group_id: ID!): [Author]!
+  authors(group_id: ID!): [Author]
   author(author_id: ID!): Author!
   groups(title: String): [Group]
   group(group_id: ID!): Group!
