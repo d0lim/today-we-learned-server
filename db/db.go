@@ -1,6 +1,10 @@
 package db
 
-import "github.com/imdigo/today-we-learned-server/handle"
+import (
+	"strings"
+
+	"github.com/imdigo/today-we-learned-server/handle"
+)
 
 // Group schema struct
 type Group struct {
@@ -37,6 +41,18 @@ type Content struct {
 	Text       string
 }
 
-func init() {
+func searchGroups(length int, condition func(i int) bool) []Group {
+	response := []Group{}
+	for i := 0; i < length; i++ {
+		if condition(i) {
+			response = append(response, Groups[i])
+		}
+	}
+	return response
+}
 
+// GetGroups from DB
+func GetGroups(title string) []Group {
+	groups := searchGroups(len(Groups), func(i int) bool { return strings.Contains(Groups[i].Title, title) })
+	return groups
 }
