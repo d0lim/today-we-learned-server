@@ -1,41 +1,43 @@
 package handle
 
+import "github.com/graph-gophers/graphql-go"
+
 // TWLsArgs type
 type TWLsArgs struct {
-	groupID GroupID
+	GroupID graphql.ID
 }
 
 // TWLArgs type
 type TWLArgs struct {
-	twlID TWLID
+	TwlID graphql.ID
 }
 
 // AuthorsArgs type
 type AuthorsArgs struct {
-	groupID GroupID
+	GroupID graphql.ID
 }
 
 // AuthorArgs type
 type AuthorArgs struct {
-	authorID AuthorID
+	AuthorID graphql.ID
 }
 
 // GroupsArgs type
 type GroupsArgs struct {
-	title string
+	Title *string
 }
 
 // GroupArgs type
 type GroupArgs struct {
-	groupID GroupID
+	GroupID graphql.ID
 }
 
 // ContentsArgs type
 type ContentsArgs struct {
-	twlID TWLID
+	TwlID graphql.ID
 }
 
 // ContentArgs type
 type ContentArgs struct {
-	contentID ContentID
+	ContentID graphql.ID
 }

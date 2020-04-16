@@ -2,54 +2,54 @@ package handle
 
 import "github.com/graph-gophers/graphql-go"
 
-// TWLResolver is resolver of TWL
-type TWLResolver struct {
-	twl *TWL
-}
-
-// ID of TWL
-func (r *TWLResolver) ID() TWLID {
-	return r.twl.ID
-}
-
-// GroupID of TWL
-func (r *TWLResolver) GroupID() GroupID {
-	return r.twl.GroupID
-}
-
-// Date of TWL
-func (r *TWLResolver) Date() string {
-	return r.twl.Date
-}
-
-// Contents of TWL
-func (r *TWLResolver) Contents() *[]ContentID {
-	return &r.twl.Contents
-}
-
 // AuthorResolver is resolver of Author
 type AuthorResolver struct {
 	author *Author
 }
 
 // ID of Author
-func (r *AuthorResolver) ID() AuthorID {
+func (r AuthorResolver) ID() graphql.ID {
 	return r.author.ID
 }
 
 // Name of Author
-func (r *AuthorResolver) Name() string {
+func (r AuthorResolver) Name() string {
 	return r.author.Name
 }
 
 // ProfileImage of Author
-func (r *AuthorResolver) ProfileImage() *string {
+func (r AuthorResolver) ProfileImage() *string {
 	return &r.author.ProfileImage
 }
 
 // Groups of Author
-func (r *AuthorResolver) Groups() *[]GroupID {
+func (r AuthorResolver) Groups() *[]*graphql.ID {
 	return &r.author.Groups
+}
+
+// TWLResolver is resolver of TWL
+type TWLResolver struct {
+	twl *TWL
+}
+
+// ID of TWL
+func (r TWLResolver) ID() graphql.ID {
+	return r.twl.ID
+}
+
+// GroupID of TWL
+func (r TWLResolver) GroupID() graphql.ID {
+	return r.twl.GroupID
+}
+
+// Date of TWL
+func (r TWLResolver) Date() string {
+	return r.twl.Date
+}
+
+// Contents of TWL
+func (r TWLResolver) Contents() *[]*graphql.ID {
+	return &r.twl.Contents
 }
 
 // GroupResolver is resolver of Group
@@ -58,7 +58,7 @@ type GroupResolver struct {
 }
 
 // ID of Group
-func (r *GroupResolver) ID() GroupID {
+func (r *GroupResolver) ID() graphql.ID {
 	return r.group.ID
 }
 
@@ -73,12 +73,12 @@ func (r *GroupResolver) Description() string {
 }
 
 // Member of Group
-func (r *GroupResolver) Member() *[]AuthorID {
+func (r *GroupResolver) Member() *[]*graphql.ID {
 	return &r.group.Member
 }
 
 // TWLs of Group
-func (r *GroupResolver) TWLs() *[]TWLID {
+func (r *GroupResolver) TWLs() *[]*graphql.ID {
 	return &r.group.TWLs
 }
 
@@ -88,17 +88,17 @@ type ContentResolver struct {
 }
 
 // ID of Content
-func (r *ContentResolver) ID() ContentID {
+func (r *ContentResolver) ID() graphql.ID {
 	return r.content.ID
 }
 
 // TWLID of Content
-func (r *ContentResolver) TWLID() TWLID {
+func (r *ContentResolver) TWLID() graphql.ID {
 	return r.content.TWLID
 }
 
 // AuthorID of Content
-func (r *ContentResolver) AuthorID() AuthorID {
+func (r *ContentResolver) AuthorID() graphql.ID {
 	return r.content.AuthorID
 }
 
@@ -117,17 +117,17 @@ func (r *ContentResolver) Text() string {
 	return r.content.Text
 }
 
-// GroupID of group
-type GroupID graphql.ID
+// // GroupID of group
+// type GroupID graphql.ID
 
-// AuthorID of Author
-type AuthorID graphql.ID
+// // AuthorID of Author
+// type AuthorID graphql.ID
 
-// TWLID of TWL
-type TWLID graphql.ID
+// // TWLID of TWL
+// type TWLID graphql.ID
 
-// ContentID of content
-type ContentID graphql.ID
+// // ContentID of content
+// type ContentID graphql.ID
 
 // // Group schema struct
 // type Group struct {

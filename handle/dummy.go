@@ -1,26 +1,32 @@
 package handle
 
+import "github.com/graph-gophers/graphql-go"
+
 // Groups is dummy data of Group
 var Groups = []Group{
 	Group{
 		ID:          "0",
 		Title:       "Study",
 		Description: "Group for Studying",
-		Member:      []AuthorID{"0", "1"},
+		Member:      []*graphql.ID{&zero, &one},
 	},
 	Group{
 		ID:          "1",
 		Title:       "Exercise",
 		Description: "Group for Exercise",
-		Member:      []AuthorID{"1", "2"},
+		Member:      []*graphql.ID{&one, &two},
 	},
 	Group{
 		ID:          "2",
 		Title:       "Coffee",
 		Description: "Group for making Coffee",
-		Member:      []AuthorID{"0", "2"},
+		Member:      []*graphql.ID{&zero, &two},
 	},
 }
+
+var zero graphql.ID = "0"
+var one graphql.ID = "1"
+var two graphql.ID = "2"
 
 // Authors is dummy data of Author
 var Authors = []Author{
@@ -28,19 +34,19 @@ var Authors = []Author{
 		ID:           "0",
 		Name:         "DoLim",
 		ProfileImage: "https://api.adorable.io/avatars/285/dolim",
-		Groups:       []GroupID{"0", "2"},
+		Groups:       []*graphql.ID{&zero, &two},
 	},
 	Author{
 		ID:           "1",
 		Name:         "Collin",
 		ProfileImage: "https://api.adorable.io/avatars/285/collin",
-		Groups:       []GroupID{"0", "1"},
+		Groups:       []*graphql.ID{&zero, &one},
 	},
 	Author{
 		ID:           "2",
 		Name:         "John",
 		ProfileImage: "https://api.adorable.io/avatars/285/john",
-		Groups:       []GroupID{"1", "2"},
+		Groups:       []*graphql.ID{&one, &two},
 	},
 }
 
