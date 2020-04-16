@@ -18,3 +18,10 @@ func ExampleGetGroup() {
 	// Output:
 	// {1 Exercise Group for Exercise [1 2] []}
 }
+
+func ExampleGetAuthors() {
+	res := GetAuthors("0")
+	fmt.Println(res)
+	// Output:
+	// [{0 DoLim https://api.adorable.io/avatars/285/dolim [0 2]} {1 Collin https://api.adorable.io/avatars/285/collin [0 1]}]
+}
