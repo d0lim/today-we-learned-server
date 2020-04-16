@@ -82,7 +82,9 @@ func searchContents(length int, condition func(i int) bool) []Content {
 
 // GetGroups from DB
 func GetGroups(title string) []Group {
-	return searchGroups(len(Groups), func(i int) bool { return strings.Contains(strings.ToLower(Groups[i].Title), strings.ToLower(title)) })
+	return searchGroups(len(Groups), func(i int) bool {
+		return strings.Contains(strings.ToLower(Groups[i].Title), strings.ToLower(title))
+	})
 }
 
 // GetGroup from DB
