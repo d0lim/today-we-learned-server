@@ -6,22 +6,22 @@ type Group {
   id: ID!
   title: String!
   description: String!
-  member: [Author]
-  twls: [TWL]
+  member: [ID] # ID of members
+  twls: [ID] # ID of TWLs
 }
 
 type Author {
   id: ID!
   name: String!
   profile_image: String
-  groups: [Group]
+  groups: [ID] # ID of groups
 }
 
 type TWL {
   id: ID!
   group_id: ID!
   date: String!
-  contents: [Content]
+  contents: [ID] # ID of contents
 }
 
 type Content {

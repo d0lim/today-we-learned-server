@@ -23,7 +23,7 @@ func (r *TWLResolver) Date() string {
 }
 
 // Contents of TWL
-func (r *TWLResolver) Contents() *[]*Content {
+func (r *TWLResolver) Contents() *[]ContentID {
 	return &r.twl.Contents
 }
 
@@ -48,7 +48,7 @@ func (r *AuthorResolver) ProfileImage() *string {
 }
 
 // Groups of Author
-func (r *AuthorResolver) Groups() *[]*Group {
+func (r *AuthorResolver) Groups() *[]GroupID {
 	return &r.author.Groups
 }
 
@@ -73,12 +73,12 @@ func (r *GroupResolver) Description() string {
 }
 
 // Member of Group
-func (r *GroupResolver) Member() *[]*Author {
+func (r *GroupResolver) Member() *[]AuthorID {
 	return &r.group.Member
 }
 
 // TWLs of Group
-func (r *GroupResolver) TWLs() *[]*TWL {
+func (r *GroupResolver) TWLs() *[]TWLID {
 	return &r.group.TWLs
 }
 
@@ -129,37 +129,37 @@ type TWLID graphql.ID
 // ContentID of content
 type ContentID graphql.ID
 
-// Group schema struct
-type Group struct {
-	ID          GroupID
-	Title       string
-	Description string
-	Member      []*Author
-	TWLs        []*TWL
-}
+// // Group schema struct
+// type Group struct {
+// 	ID          GroupID
+// 	Title       string
+// 	Description string
+// 	Member      []*Author
+// 	TWLs        []*TWL
+// }
 
-// Author schema struct
-type Author struct {
-	ID           AuthorID
-	Name         string
-	ProfileImage string
-	Groups       []*Group
-}
+// // Author schema struct
+// type Author struct {
+// 	ID           AuthorID
+// 	Name         string
+// 	ProfileImage string
+// 	Groups       []*Group
+// }
 
-// TWL schema struct
-type TWL struct {
-	ID       TWLID
-	GroupID  GroupID
-	Date     string
-	Contents []*Content
-}
+// // TWL schema struct
+// type TWL struct {
+// 	ID       TWLID
+// 	GroupID  GroupID
+// 	Date     string
+// 	Contents []*Content
+// }
 
-// Content schema struct
-type Content struct {
-	ID         ContentID
-	TWLID      TWLID
-	AuthorID   AuthorID
-	CreatedAt  string
-	ModifiedAt string
-	Text       string
-}
+// // Content schema struct
+// type Content struct {
+// 	ID         ContentID
+// 	TWLID      TWLID
+// 	AuthorID   AuthorID
+// 	CreatedAt  string
+// 	ModifiedAt string
+// 	Text       string
+// }

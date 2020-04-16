@@ -1,6 +1,4 @@
-package db
-
-import "github.com/imdigo/today-we-learned-server/handle"
+package handle
 
 // Groups is dummy data of Group
 var Groups = []Group{
@@ -8,19 +6,19 @@ var Groups = []Group{
 		ID:          "0",
 		Title:       "Study",
 		Description: "Group for Studying",
-		Member:      []handle.AuthorID{"0", "1"},
+		Member:      []AuthorID{"0", "1"},
 	},
 	Group{
 		ID:          "1",
 		Title:       "Exercise",
 		Description: "Group for Exercise",
-		Member:      []handle.AuthorID{"1", "2"},
+		Member:      []AuthorID{"1", "2"},
 	},
 	Group{
 		ID:          "2",
 		Title:       "Coffee",
 		Description: "Group for making Coffee",
-		Member:      []handle.AuthorID{"0", "2"},
+		Member:      []AuthorID{"0", "2"},
 	},
 }
 
@@ -30,19 +28,19 @@ var Authors = []Author{
 		ID:           "0",
 		Name:         "DoLim",
 		ProfileImage: "https://api.adorable.io/avatars/285/dolim",
-		Groups:       []handle.GroupID{"0", "2"},
+		Groups:       []GroupID{"0", "2"},
 	},
 	Author{
 		ID:           "1",
 		Name:         "Collin",
 		ProfileImage: "https://api.adorable.io/avatars/285/collin",
-		Groups:       []handle.GroupID{"0", "1"},
+		Groups:       []GroupID{"0", "1"},
 	},
 	Author{
 		ID:           "2",
 		Name:         "John",
 		ProfileImage: "https://api.adorable.io/avatars/285/john",
-		Groups:       []handle.GroupID{"1", "2"},
+		Groups:       []GroupID{"1", "2"},
 	},
 }
 

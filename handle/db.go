@@ -1,41 +1,40 @@
-package db
+package handle
 
 import (
+	"errors"
 	"strings"
-
-	"github.com/imdigo/today-we-learned-server/handle"
 )
 
 // Group schema struct
 type Group struct {
-	ID          handle.GroupID
+	ID          GroupID
 	Title       string
 	Description string
-	Member      []handle.AuthorID
-	TWLs        []handle.TWLID
+	Member      []AuthorID
+	TWLs        []TWLID
 }
 
 // Author schema struct
 type Author struct {
-	ID           handle.AuthorID
+	ID           AuthorID
 	Name         string
 	ProfileImage string
-	Groups       []handle.GroupID
+	Groups       []GroupID
 }
 
 // TWL schema struct
 type TWL struct {
-	ID       handle.TWLID
-	GroupID  handle.GroupID
+	ID       TWLID
+	GroupID  GroupID
 	Date     string
-	Contents []handle.ContentID
+	Contents []ContentID
 }
 
 // Content schema struct
 type Content struct {
-	ID         handle.ContentID
-	TWLID      handle.TWLID
-	AuthorID   handle.AuthorID
+	ID         ContentID
+	TWLID      TWLID
+	AuthorID   AuthorID
 	CreatedAt  string
 	ModifiedAt string
 	Text       string
@@ -53,6 +52,15 @@ func searchGroups(length int, condition func(i int) bool) []Group {
 
 // GetGroups from DB
 func GetGroups(title string) []Group {
-	groups := searchGroups(len(Groups), func(i int) bool { return strings.Contains(Groups[i].Title, title) })
-	return groups
+	return searchGroups(len(Groups), func(i int) bool { return strings.Contains(Groups[i].Title, title) })
+}
+
+// GetGroup from DB
+func GetGroup(id GroupID) (Group, error) {
+	for i := 0; i < len(Groups); i++ {
+		if Groups[i].ID == id {
+			return Groups[i], nil
+		}
+	}
+	return Group{}, errors.New("No such group with that id")
 }
