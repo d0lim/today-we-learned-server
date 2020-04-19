@@ -5,8 +5,10 @@ import {
   getUsers,
   getPost,
   getPosts,
+  getActivity,
+  getActivities,
 } from "./db";
-import { Users, Groups, Posts } from "./dummy";
+import { Users, Groups, Posts, Activities } from "./dummy";
 
 const resolvers = {
   Query: {
@@ -16,6 +18,8 @@ const resolvers = {
     groups: (_, { title }) => getGroups(title),
     post: (_, { post_id }) => getPost(post_id),
     posts: (_, { group_id }) => getPosts(group_id),
+    activity: (_, { activity_id }) => getActivity(activity_id),
+    activities: (_, { post_id, user_id }) => getActivities(post_id, user_id),
   },
   Group: {
     users(parent) {
@@ -33,6 +37,19 @@ const resolvers = {
     groups(parent) {
       //console.log("parent in User is", parent);
       return Groups.filter((group) => group.userId.includes(parent.id));
+    },
+    activities(parent) {
+      return Activities.filter((activity) => activity.userId === parent.id);
+    },
+  },
+  Post: {
+    activities(parent) {
+      return Activities.filter((activity) => activity.postId === parent.id);
+    },
+  },
+  Activity: {
+    user(parent) {
+      return Users.find((user) => user.id === parent.userId);
     },
   },
 };

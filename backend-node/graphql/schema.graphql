@@ -15,11 +15,21 @@ type User {
   name: String!
   profile_image: String
   groups: [Group]
+  activities: [Activity]
 }
 
 type Post {
   id: ID!
   date: String!
+  activities: [Activity]
+}
+
+type Activity {
+  id: ID!
+  user: User!
+  createdAt: String!
+  modifiedAt: String!
+  text: String!
 }
 
 type Query {
@@ -29,4 +39,6 @@ type Query {
   group(group_id: ID!): Group!
   posts(group_id: ID!): [Post]
   post(post_id: ID!): Post!
+  activities(post_id: ID, user_id: ID): [Activity]
+  activity(activity_id: ID!): Activity!
 }
