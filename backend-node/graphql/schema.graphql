@@ -6,17 +6,19 @@ type Group {
   id: ID!
   title: String!
   description: String!
+  users: [User]
 }
 
 type User {
   id: ID!
   name: String!
   profile_image: String
+  groups: [Group]
 }
 
 type Query {
   users(group_id: ID!): [User]
   user(user_id: ID!): User!
-  groups(user_id: ID): [Group]
+  groups(title: String): [Group]
   group(group_id: ID!): Group!
 }
