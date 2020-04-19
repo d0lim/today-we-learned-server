@@ -7,8 +7,8 @@ import (
 
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	"github.com/imdigo/today-we-learned-server/handle"
-	"github.com/imdigo/today-we-learned-server/utils"
+	"github.com/imdigo/today-we-learned-server/backend-go/handle"
+	"github.com/imdigo/today-we-learned-server/backend-go/utils"
 )
 
 const schemaPath string = "./handle/schema.graphql"

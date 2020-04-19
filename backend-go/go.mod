@@ -1,4 +1,4 @@
-module github.com/imdigo/today-we-learned-server
+module github.com/imdigo/today-we-learned-server/backend-go
 
 go 1.14
 
