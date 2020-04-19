@@ -29,7 +29,7 @@ const resolvers = {
       return Users.filter((user) => user.groupId.includes(parent.id));
     },
     posts(parent) {
-      console.log("parent in Group, posts is", parent);
+      // console.log("parent in Group, posts is", parent);
       return Posts.filter((post) => post.groupId === parent.id);
     },
   },
