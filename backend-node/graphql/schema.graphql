@@ -7,6 +7,7 @@ type Group {
   title: String!
   description: String!
   users: [User]
+  posts: [Post]
 }
 
 type User {
@@ -16,9 +17,16 @@ type User {
   groups: [Group]
 }
 
+type Post {
+  id: ID!
+  date: String!
+}
+
 type Query {
   users(group_id: ID!): [User]
   user(user_id: ID!): User!
   groups(title: String): [Group]
   group(group_id: ID!): Group!
+  posts(group_id: ID!): [Post]
+  post(post_id: ID!): Post!
 }
