@@ -1,0 +1,44 @@
+schema {
+  query: Query
+}
+
+type Group {
+  id: ID!
+  title: String!
+  description: String!
+  users: [User]
+  posts: [Post]
+}
+
+type User {
+  id: ID!
+  name: String!
+  profile_image: String
+  groups: [Group]
+  activities: [Activity]
+}
+
+type Post {
+  id: ID!
+  date: String!
+  activities: [Activity]
+}
+
+type Activity {
+  id: ID!
+  user: User!
+  createdAt: String!
+  modifiedAt: String!
+  text: String!
+}
+
+type Query {
+  users(group_id: ID!): [User]
+  user(user_id: ID!): User!
+  groups(title: String): [Group]
+  group(group_id: ID!): Group!
+  posts(group_id: ID!): [Post]
+  post(post_id: ID!): Post!
+  activities(post_id: ID, user_id: ID): [Activity]
+  activity(activity_id: ID!): Activity!
+}
