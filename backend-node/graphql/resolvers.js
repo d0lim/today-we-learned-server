@@ -9,8 +9,10 @@ import {
   getActivities,
 } from "./db";
 import { Users, Groups, Posts, Activities } from "./dummy";
+import { ObjectIdScalar } from "./scalar";
 
 const resolvers = {
+  ObjectId: ObjectIdScalar,
   Query: {
     user: (_, { user_id }) => getUser(user_id),
     users: (_, { group_id }) => getUsers(group_id),

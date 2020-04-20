@@ -7,8 +7,10 @@
   "author": "DoLim",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "global": "^4.4.0",
-    "graphql-yoga": "^1.18.3"
+    "graphql-yoga": "^1.18.3",
+    "mongoose": "^5.9.9"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

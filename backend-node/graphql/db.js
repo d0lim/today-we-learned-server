@@ -1,4 +1,13 @@
 import { Groups, Users, Posts, Activities } from "./dummy";
+import mongoose from "mongoose";
+
+export const connectToMongoDB = async (password) => {
+  const mongoUri = `mongodb+srv://admin:${password}@twlatlas-iprie.gcp.mongodb.net/test?retryWrites=true&w=majority`;
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+};
 
 export const getUsers = (groupId) =>
   Users.filter((user) => user.groupId.includes(groupId));
