@@ -1,7 +1,7 @@
-import { GraphQLServer } from "graphql-yoga";
-import resolvers from "./graphql/resolvers";
+// import { GraphQLServer } from "graphql-yoga";
+// import resolvers from "./graphql/resolvers";
 import dotenv from "dotenv";
-import { connectToMongoDB } from "./graphql/db";
+import { connectToMongoDB, addGroup } from "./graphql/db";
 
 dotenv.config();
 
@@ -21,8 +21,15 @@ dotenv.config();
 // };
 connectToMongoDB(process.env.MONGO_PASSWORD);
 
-const server = new GraphQLServer({
-  typeDefs: "graphql/schema.graphql",
-  resolvers,
-});
-server.start(() => console.log("Server is running on localhost:4000"));
+const g = {
+  title: "Cafe Group",
+  description: "Group for logging daily coffee making!",
+};
+
+addGroup(g);
+
+// const server = new GraphQLServer({
+//   typeDefs: "graphql/schema.graphql",
+//   resolvers,
+// });
+// server.start(() => console.log("Server is running on localhost:4000"));
