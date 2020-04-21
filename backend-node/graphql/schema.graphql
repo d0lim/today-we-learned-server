@@ -23,6 +23,7 @@ type User {
 
 type Post {
   id: ObjectId!
+  group: Group!
   date: Date!
   activities: [Activity]
 }
@@ -30,6 +31,7 @@ type Post {
 type Activity {
   id: ObjectId!
   user: User!
+  post: Post!
   createdAt: Date!
   modifiedAt: Date!
   text: String!

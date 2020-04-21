@@ -68,7 +68,31 @@ export const getActivity = async (_activityId) => {
   return await Activity.findById(_activityId);
 };
 
-export const addGroup = async (groupObject) => {
+export const addUserToGroup = async (_userId, _groupId) => {
+  const oldUser = await User.findById(_userId);
+  const oldGroup = await Group.findById(_groupId);
+  let { name, profile_image, groupId, activityId } = oldUser;
+  groupId = groupId.concat(_groupId);
+  const updatedUser = {
+    name,
+    profile_image,
+    groupId,
+    activityId,
+  };
+  let { title, description, userId, postId } = oldGroup;
+  userId = userId.concat(_userId);
+  const updatedGroup = {
+    title,
+    description,
+    userId,
+    postId,
+  };
+  updateUser(_userId, updatedUser);
+  updateGroup(_groupId, updatedGroup);
+};
+
+// Group can be made itself
+export const createGroup = async (groupObject) => {
   const { title, description, userId, postId } = groupObject;
   const group = new Group({
     title,
@@ -80,7 +104,8 @@ export const addGroup = async (groupObject) => {
   console.log("Group Saved :", savedGroup);
 };
 
-export const addUser = async (userObject) => {
+// User can be made itself
+export const createUser = async (userObject) => {
   const { name, profile_image, groupId, activityId } = userObject;
   const user = new User({
     name,
@@ -92,9 +117,11 @@ export const addUser = async (userObject) => {
   console.log("User Saved :", savedUser);
 };
 
-export const addPost = async (postObject) => {
-  const { date, activityId } = postObject;
+// Post must be made with group
+export const createPost = async (postObject) => {
+  const { groupId, date, activityId } = postObject;
   const post = new Post({
+    groupId,
     date,
     activityId,
   });
@@ -102,14 +129,38 @@ export const addPost = async (postObject) => {
   console.log("Post Saved :", savedPost);
 };
 
-export const addActivity = async (activityObject) => {
-  const { userId, createdAt, modifiedAt, text } = activityObject;
+// Activity must be made with user and post
+export const createActivity = async (activityObject) => {
+  const { userId, postId, createdAt, modifiedAt, text } = activityObject;
   const activity = new Activity({
     userId,
+    postId,
     createdAt,
     modifiedAt,
     text,
   });
   const savedActivity = await activity.save({ setDefaultsOnInsert: true });
   console.log("Activity Saved :", savedActivity);
+};
+
+export const updateGroup = async (groupId, groupObject) => {
+  const updatedGroup = await Group.findByIdAndUpdate(groupId, groupObject, {
+    new: true,
+  }).exec();
+  if (!updatedGroup) {
+    console.log("Fucked when updating group");
+    return;
+  }
+  console.log("Group Updated : ", updatedGroup);
+};
+
+export const updateUser = async (userId, userObject) => {
+  const updatedUser = await User.findByIdAndUpdate(userId, userObject, {
+    new: true,
+  }).exec();
+  if (!updatedUser) {
+    console.log("Fucked when updating user");
+    return;
+  }
+  console.log("User Updated : ", updatedUser);
 };

@@ -7,6 +7,10 @@ const ActivitySchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
+  postId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
   createdAt: {
     type: Date,
     required: true,

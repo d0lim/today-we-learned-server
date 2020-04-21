@@ -1,7 +1,15 @@
 // import { GraphQLServer } from "graphql-yoga";
 // import resolvers from "./graphql/resolvers";
 import dotenv from "dotenv";
-import { connectToMongoDB, addGroup } from "./graphql/db";
+import {
+  connectToMongoDB,
+  createGroup,
+  getGroups,
+  getUser,
+  addUserToGroup,
+} from "./graphql/db";
+import { addDummyGroups, addDummyUsers } from "./graphql/dummy";
+import { ObjectId } from "mongodb";
 
 dotenv.config();
 
@@ -19,15 +27,22 @@ dotenv.config();
 //     hello: (_, { name }) => `Hello ${name || "World"}`,
 //   },
 // };
-connectToMongoDB(process.env.MONGO_PASSWORD);
-
-const g = {
-  title: "Cafe Group",
-  description: "Group for logging daily coffee making!",
+const mgo = async () => {
+  connectToMongoDB(process.env.MONGO_PASSWORD);
+  // "5e9ef838edc93d10553f0734" //user
+  // "5e9ef838edc93d10553f072f" //group
+  // addUserToGroup(
+  //   ObjectId("5e9ef838edc93d10553f0734"),
+  //   ObjectId("5e9ef838edc93d10553f072f")
+  // );
+  const groups = await getGroups();
+  console.log(groups);
 };
+mgo();
 
-addGroup(g);
-
+// u.then(function (res) {
+//   console.log(res);
+// });
 // const server = new GraphQLServer({
 //   typeDefs: "graphql/schema.graphql",
 //   resolvers,

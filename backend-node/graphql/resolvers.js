@@ -46,6 +46,9 @@ const resolvers = {
     },
   },
   Post: {
+    group(parent) {
+      return Groups.find((group) => group.postId.includes(parent.id));
+    },
     activities(parent) {
       return Activities.filter((activity) => activity.postId === parent.id);
     },
@@ -53,6 +56,9 @@ const resolvers = {
   Activity: {
     user(parent) {
       return Users.find((user) => user.id === parent.userId);
+    },
+    post(parent) {
+      return Posts.find((post) => post.activityId.includes(parent.id));
     },
   },
 };
