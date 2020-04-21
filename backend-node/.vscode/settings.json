@@ -9,5 +9,5 @@
   // "[javascript]": {
   //     "editor.formatOnSave": true
   // }
-  "typescript.tsdk": "./frontend/node_modules/typescript/lib"
+  "editor.mouseWheelScrollSensitivity": 10
 }
