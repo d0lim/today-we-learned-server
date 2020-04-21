@@ -1,4 +1,5 @@
 scalar ObjectId
+scalar Date
 
 schema {
   query: Query
@@ -22,15 +23,15 @@ type User {
 
 type Post {
   id: ObjectId!
-  date: String!
+  date: Date!
   activities: [Activity]
 }
 
 type Activity {
   id: ObjectId!
   user: User!
-  createdAt: String!
-  modifiedAt: String!
+  createdAt: Date!
+  modifiedAt: Date!
   text: String!
 }
 

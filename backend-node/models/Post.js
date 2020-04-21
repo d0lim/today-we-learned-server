@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   date: {
-    type: String,
+    type: Date,
     required: true,
+    default: Date.now,
   },
 
   activityId: {
