@@ -134,6 +134,21 @@ export const createPost = async (postObject) => {
   });
   const savedPost = await post.save({ setDefaultsOnInsert: true });
   console.log("Post Saved :", savedPost);
+
+  const oldGroup = await getGroup(groupId);
+  let { title, description, userId, postId } = oldGroup;
+  if (postId.includes(savedPost._id)) {
+    console.log("Overlap in postId of group:", title);
+    return;
+  }
+  postId = postId.concat(savedPost._id);
+  const updatedGroup = {
+    title,
+    description,
+    userId,
+    postId,
+  };
+  updateGroup(groupId, updatedGroup);
 };
 
 // Activity must be made with user and post
