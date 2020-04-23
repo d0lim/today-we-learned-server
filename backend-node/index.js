@@ -7,6 +7,7 @@ import {
   getGroups,
   getUser,
   addUserToGroup,
+  getUsers,
 } from "./db/db";
 import { addDummyGroups, addDummyUsers } from "./graphql/dummy";
 import { ObjectId } from "mongodb";
@@ -29,14 +30,16 @@ dotenv.config();
 // };
 const mgo = async () => {
   connectToMongoDB(process.env.MONGO_PASSWORD);
-  // "5e9ef838edc93d10553f0734" //user
-  // "5e9ef838edc93d10553f072f" //group
-  // addUserToGroup(
-  //   ObjectId("5e9ef838edc93d10553f0734"),
-  //   ObjectId("5e9ef838edc93d10553f072f")
-  // );
+
+  const users = await getUsers();
   const groups = await getGroups();
-  console.log(groups);
+  console.log("Users Before ::", users);
+  console.log("Groups Before ::", groups);
+  await addUserToGroup(users[0]._id, groups[0]._id);
+  const usersAfter = await getUsers();
+  const groupsAfter = await getGroups();
+  console.log("Users After ::", usersAfter);
+  console.log("Groups After ::", groupsAfter);
 };
 mgo();
 

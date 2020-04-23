@@ -9,11 +9,14 @@ export const connectToMongoDB = async (password) => {
   await mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 };
 
 export const getUsers = async (_groupId) => {
-  return await User.find({ groupId: { $elemMatch: _groupId } });
+  if (_groupId !== undefined)
+    return await User.find({ groupId: { $elemMatch: _groupId } });
+  return User.find();
 };
 
 export const getUser = async (_userId) => {
@@ -69,9 +72,14 @@ export const getActivity = async (_activityId) => {
 };
 
 export const addUserToGroup = async (_userId, _groupId) => {
-  const oldUser = await User.findById(_userId);
-  const oldGroup = await Group.findById(_groupId);
+  const oldUser = await getUser(_userId);
+  const oldGroup = await getGroup(_groupId);
   let { name, profile_image, groupId, activityId } = oldUser;
+  let { title, description, userId, postId } = oldGroup;
+  if (groupId.includes(_groupId) || userId.includes(_userId)) {
+    console.log("Overlap when add user to group!!");
+    return;
+  }
   groupId = groupId.concat(_groupId);
   const updatedUser = {
     name,
@@ -79,7 +87,6 @@ export const addUserToGroup = async (_userId, _groupId) => {
     groupId,
     activityId,
   };
-  let { title, description, userId, postId } = oldGroup;
   userId = userId.concat(_userId);
   const updatedGroup = {
     title,
