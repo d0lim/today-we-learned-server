@@ -7,7 +7,7 @@ import {
   getGroups,
   getUser,
   addUserToGroup,
-} from "./graphql/db";
+} from "./db/db";
 import { addDummyGroups, addDummyUsers } from "./graphql/dummy";
 import { ObjectId } from "mongodb";
 

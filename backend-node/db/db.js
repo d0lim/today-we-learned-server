@@ -1,7 +1,7 @@
-import Activity from "../models/Activity";
-import User from "../models/User";
-import Group from "../models/Group";
-import Post from "../models/Post";
+import Activity from "./models/Activity";
+import User from "./models/User";
+import Group from "./models/Group";
+import Post from "./models/Post";
 import mongoose from "mongoose";
 
 export const connectToMongoDB = async (password) => {

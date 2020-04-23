@@ -1,4 +1,4 @@
-import { createGroup, createUser } from "./db";
+import { createGroup, createUser } from "../db/db";
 
 const groups = [
   {
