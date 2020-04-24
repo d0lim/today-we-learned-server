@@ -3,9 +3,10 @@ FROM gitpod/workspace-mongodb
 USER gitpod
 
 RUN sudo apt-get update && \
-    sudo apt-get install -y zsh
+    sudo apt-get install -y zsh bat
+RUN brew install exa
 
-ENV ZSH_THEME agnoster
+ENV ZSH_THEME cloud
 
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 
