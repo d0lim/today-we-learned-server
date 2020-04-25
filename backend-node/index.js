@@ -9,6 +9,9 @@ import {
   addUserToGroup,
   getUsers,
   createPost,
+  getPosts,
+  createActivity,
+  getPost,
 } from "./db/db";
 import { addDummyGroups, addDummyUsers } from "./graphql/dummy";
 import { ObjectId } from "mongodb";
@@ -30,20 +33,29 @@ dotenv.config();
 //   },
 // };
 
-//5ea1464007ca3e2ce4edad10
 const mgo = async () => {
   connectToMongoDB(process.env.MONGO_PASSWORD);
 
   const groups = await getGroups();
-  console.log("Groups Before ::", groups);
-  const gId = groups[0]._id;
-  const dPost = {
-    groupId: gId,
-  };
-  await createPost(dPost);
 
-  const groupsAfter = await getGroups();
-  console.log("Groups After ::", groupsAfter);
+  const gId = groups[0]._id;
+  const uId = groups[0].userId[0];
+  const pId = groups[0].postId[0];
+  const newActivity = {
+    userId: uId,
+    postId: pId,
+    text: "New Activity 1",
+  };
+  await createActivity(newActivity);
+  // const dPost = {
+  //   groupId: gId,
+  // };
+  // await createPost(dPost);
+
+  // const groupsAfter = await getGroups();
+  // console.log("Groups After ::", groupsAfter);
+  const postAfter = await getPost(pId);
+  console.log(postAfter);
 };
 mgo();
 

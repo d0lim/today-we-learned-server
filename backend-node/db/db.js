@@ -208,3 +208,14 @@ export const updateUser = async (userId, userObject) => {
   }
   console.log("User Updated : ", updatedUser);
 };
+
+export const updatePost = async (postId, postObject) => {
+  const updatedPost = await Post.findByIdAndUpdate(postId, postObject, {
+    new: true,
+  }).exec();
+  if (!updatedPost) {
+    console.log("Fucked when updating post");
+    return;
+  }
+  console.log("Post Updated : ", updatedPost);
+};
