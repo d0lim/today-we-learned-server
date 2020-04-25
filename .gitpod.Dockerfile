@@ -18,6 +18,7 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/too
     && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 RUN sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="cloud"/' ~/.zshrc
+RUN sed -i 's/plugins=(git)/plugins=(git history-substring-search zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
 CMD ["zsh"]
 
