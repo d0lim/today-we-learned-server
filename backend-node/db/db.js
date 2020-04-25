@@ -153,16 +153,38 @@ export const createPost = async (postObject) => {
 
 // Activity must be made with user and post
 export const createActivity = async (activityObject) => {
-  const { userId, postId, createdAt, modifiedAt, text } = activityObject;
-  const activity = new Activity({
-    userId, // necessary
-    postId, // necessary
-    createdAt, // necessary
-    modifiedAt, // necessary
-    text, // necessary
-  });
+  const activity = new Activity(activityObject);
   const savedActivity = await activity.save({ setDefaultsOnInsert: true });
   console.log("Activity Saved :", savedActivity);
+
+  const oldUser = await getUser(activityObject.userId);
+  const oldPost = await getPost(activityObject.postId);
+  if (
+    oldUser.activityId.includes(savedActivity._id) ||
+    oldPost.activityId.includes(savedActivity._id)
+  ) {
+    console.log(
+      "Overlap in activityId of user or post. User, Post:",
+      oldUser.name,
+      "/",
+      oldPost.groupId,
+      oldPost.date
+    );
+    return;
+  }
+  const updatedUser = {
+    name: oldUser.name,
+    profile_image: oldUser.profile_image,
+    groupId: oldUser.groupId,
+    activityId: oldUser.activityId.concat(savedActivity._id),
+  };
+  const updatedPost = {
+    groupId: oldPost.groupId,
+    date: oldPost.date,
+    activityId: oldPost.activityId.concat(savedActivity._id),
+  };
+  updateUser(savedActivity.userId, updatedUser);
+  updatePost(savedActivity.postId, updatedPost);
 };
 
 export const updateGroup = async (groupId, groupObject) => {
