@@ -19,6 +19,8 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/too
 
 RUN sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="cloud"/' ~/.zshrc
 RUN sed -i 's/plugins=(git)/plugins=(git history-substring-search zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+RUN echo "alias l='exa -lah'" >> ~/.zshrc
+RUN echo "alias ll='exa -lh'" >> ~/.zshrc
 
 CMD ["zsh"]
 
