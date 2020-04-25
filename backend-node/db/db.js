@@ -155,11 +155,11 @@ export const createPost = async (postObject) => {
 export const createActivity = async (activityObject) => {
   const { userId, postId, createdAt, modifiedAt, text } = activityObject;
   const activity = new Activity({
-    userId,
-    postId,
-    createdAt,
-    modifiedAt,
-    text,
+    userId, // necessary
+    postId, // necessary
+    createdAt, // necessary
+    modifiedAt, // necessary
+    text, // necessary
   });
   const savedActivity = await activity.save({ setDefaultsOnInsert: true });
   console.log("Activity Saved :", savedActivity);
