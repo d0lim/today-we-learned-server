@@ -1,20 +1,12 @@
 // import { GraphQLServer } from "graphql-yoga";
 // import resolvers from "./graphql/resolvers";
 import dotenv from "dotenv";
-import {
-  connectToMongoDB,
-  createGroup,
-  getGroups,
-  getUser,
-  addUserToGroup,
-  getUsers,
-  createPost,
-  getPosts,
-  createActivity,
-  getPost,
-} from "./db/db";
+import { connectToMongoDB } from "./db/db";
 import { addDummyGroups, addDummyUsers } from "./graphql/dummy";
 import { ObjectId } from "mongodb";
+import { getGroups } from "./db/crud/groupCrud";
+import { createActivity } from "./db/crud/activityCrud";
+import { getPost } from "./db/crud/postCrud";
 
 dotenv.config();
 
