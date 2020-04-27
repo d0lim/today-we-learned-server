@@ -13,7 +13,7 @@ export const getGroups = async (_title, _userId, _postId) => {
     });
   else {
     if (_postId !== undefined) {
-      return await Group.find({ postId: { $elemMatch: { $ep: _postId } } });
+      return await Group.find({ postId: { $elemMatch: { $eq: _postId } } });
     }
     return await Group.find();
   }

@@ -3,14 +3,14 @@ import { updateGroup, getGroup } from "./groupCrud";
 
 export const getPosts = async (_groupId, _activityId) => {
   if (_groupId !== undefined && _activityId === undefined)
-    return await Post.find({ groupId: { $elemMatch: { $eq: _groupId } } });
+    return await Post.find({ groupId: _groupId });
   else if (_groupId === undefined && _activityId !== undefined)
     return await Post.find({
       activityId: { $elemMatch: { $eq: _activityId } },
     });
   else if (_groupId !== undefined && _activityId !== undefined)
     return await Post.find({
-      groupId: { $elemMatch: { $eq: _groupId } },
+      groupId: _groupId,
       activityId: { $elemMatch: { $eq: _activityId } },
     });
   else return await Post.find();
