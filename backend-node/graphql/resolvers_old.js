@@ -1,3 +1,14 @@
+import {
+  getGroup,
+  getGroups,
+  getUser,
+  getUsers,
+  getPost,
+  getPosts,
+  getActivity,
+  getActivities,
+} from "./db";
+import { Users, Groups, Posts, Activities } from "./dummy";
 import { ObjectIdScalar, DateScalar } from "./scalar";
 
 const resolvers = {
