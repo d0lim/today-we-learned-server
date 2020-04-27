@@ -6,21 +6,15 @@ export const getActivities = async (_postId, _userId) => {
   if (_postId === undefined && _userId === undefined) {
     return await Activity.find();
   } else if (_postId !== undefined && _userId === undefined) {
-    // return Activities.filter((activity) => activity.postId === _postId);
     return await Activity.find({ postId: _postId });
   } else if (_postId === undefined && _userId !== undefined) {
-    // return Activities.filter((activity) => activity.userId === _userId);
     return await Activity.find({ userId: _userId });
   } else if (_postId !== undefined && _userId !== undefined) {
-    // return Activities.filter(
-    //   (activity) => activity.postId === _postId && activity.userId === _userId
-    // );
     return await Activity.find({ userId: _userId, postId: _postId });
   }
 };
 
 export const getActivity = async (_activityId) => {
-  // Activities.find((activity) => activity.id === activityId);
   return await Activity.findById(_activityId);
 };
 

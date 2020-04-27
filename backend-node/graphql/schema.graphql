@@ -6,7 +6,7 @@ schema {
 }
 
 type Group {
-  id: ObjectId!
+  _id: ObjectId!
   title: String!
   description: String!
   users: [User]
@@ -14,7 +14,7 @@ type Group {
 }
 
 type User {
-  id: ObjectId!
+  _id: ObjectId!
   name: String!
   profile_image: String
   groups: [Group]
@@ -22,14 +22,14 @@ type User {
 }
 
 type Post {
-  id: ObjectId!
+  _id: ObjectId!
   group: Group!
   date: Date!
   activities: [Activity]
 }
 
 type Activity {
-  id: ObjectId!
+  _id: ObjectId!
   user: User!
   post: Post!
   createdAt: Date!
