@@ -8,11 +8,11 @@ export const getGroups = async (_title, _userId) => {
   if (_title !== undefined && _userId === undefined)
     return await Group.find({ title: { $regex: `.*${_title}.*` } });
   else if (_title === undefined && _userId !== undefined)
-    return await Group.find({ userId: { $elemMatch: _userId } });
+    return await Group.find({ userId: { $elemMatch: { $eq: _userId } } });
   else if (_title !== undefined && _userId !== undefined)
     await Group.find({
       title: { $regex: `.*${_title}.*` },
-      userId: { $elemMatch: _userId },
+      userId: { $elemMatch: { $eq: _userId } },
     });
   return await Group.find();
 };

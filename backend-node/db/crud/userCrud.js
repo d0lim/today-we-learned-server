@@ -2,7 +2,7 @@ import User from "../models/User";
 
 export const getUsers = async (_groupId) => {
   if (_groupId !== undefined)
-    return await User.find({ groupId: { $elemMatch: _groupId } });
+    return await User.find({ groupId: { $eq: _groupId } });
   return User.find();
 };
 
