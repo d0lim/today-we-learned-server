@@ -1,10 +1,7 @@
 import Group from "../models/Group";
 
-export const getGroups = async (_title, _userId) => {
-  // console.log("title is ", title);
-  // if (title !== undefined)
-  //   return Groups.filter((group) => group.title.includes(title));
-  // return Groups;
+// FIXME: Not perfect condition. Need to find solution to solve.
+export const getGroups = async (_title, _userId, _postId) => {
   if (_title !== undefined && _userId === undefined)
     return await Group.find({ title: { $regex: `.*${_title}.*` } });
   else if (_title === undefined && _userId !== undefined)
@@ -14,11 +11,15 @@ export const getGroups = async (_title, _userId) => {
       title: { $regex: `.*${_title}.*` },
       userId: { $elemMatch: { $eq: _userId } },
     });
-  return await Group.find();
+  else {
+    if (_postId !== undefined) {
+      return await Group.find({ postId: { $elemMatch: { $ep: _postId } } });
+    }
+    return await Group.find();
+  }
 };
 
 export const getGroup = async (_groupId) => {
-  // Groups.find((group) => group.id === groupId);
   return await Group.findById(_groupId);
 };
 

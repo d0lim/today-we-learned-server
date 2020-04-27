@@ -8,7 +8,6 @@ export const getUsers = async (_groupId) => {
 
 export const getUser = async (_userId) => {
   return await User.findById(_userId);
-  // Users.find((user) => user.id === userId);
 };
 
 // User can be made itself

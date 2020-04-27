@@ -2,7 +2,6 @@ import Post from "../models/Post";
 import { updateGroup, getGroup } from "./groupCrud";
 
 export const getPosts = async (_groupId, _activityId) => {
-  // Posts.filter((post) => post.groupId === groupId);
   if (_groupId !== undefined && _activityId === undefined)
     return await Post.find({ groupId: { $elemMatch: { $eq: _groupId } } });
   else if (_groupId === undefined && _activityId !== undefined)
@@ -18,7 +17,6 @@ export const getPosts = async (_groupId, _activityId) => {
 };
 
 export const getPost = async (_postId) => {
-  // Posts.find((post) => post.id === _postId);
   return await Post.findById(_postId);
 };
 
