@@ -1,3 +1,4 @@
+import Post from "../models/Post";
 import { updateGroup, getGroup } from "./groupCrud";
 
 export const getPosts = async (_groupId) => {

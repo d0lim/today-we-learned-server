@@ -1,3 +1,4 @@
+import Activity from "../models/Activity";
 import { getUser, updateUser } from "./userCrud";
 import { getPost, updatePost } from "./postCrud";
 
@@ -57,4 +58,19 @@ export const createActivity = async (activityObject) => {
   };
   updateUser(savedActivity.userId, updatedUser);
   updatePost(savedActivity.postId, updatedPost);
+};
+
+export const updateActivity = async (activityId, activityObject) => {
+  const updatedActivity = await Activity.findByIdAndUpdate(
+    activityId,
+    activityObject,
+    {
+      new: true,
+    }
+  ).exec();
+  if (!updateActivity) {
+    console.log("Fucked when updating activity");
+    return;
+  }
+  console.log("Acitivy Updated : ", updatedActivity);
 };

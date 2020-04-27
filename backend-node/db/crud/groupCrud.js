@@ -1,3 +1,5 @@
+import Group from "../models/Group";
+
 export const getGroups = async (_title) => {
   // console.log("title is ", title);
   // if (title !== undefined)
