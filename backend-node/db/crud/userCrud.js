@@ -21,6 +21,7 @@ export const createUser = async (userObject) => {
   });
   const savedUser = await user.save({ setDefaultsOnInsert: true });
   console.log("User Saved :", savedUser);
+  return savedUser;
 };
 
 export const updateUser = async (userId, userObject) => {

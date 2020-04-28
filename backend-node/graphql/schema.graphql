@@ -3,6 +3,7 @@ scalar Date
 
 schema {
   query: Query
+  mutation: Mutation
 }
 
 type Group {
@@ -46,4 +47,8 @@ type Query {
   post(post_id: ObjectId!): Post!
   activities(post_id: ObjectId, user_id: ObjectId): [Activity]
   activity(activity_id: ObjectId!): Activity!
+}
+
+type Mutation {
+  addUser(name: String!, profile_image: String): User!
 }

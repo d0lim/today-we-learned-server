@@ -1,5 +1,5 @@
 import { ObjectIdScalar, DateScalar } from "./scalar";
-import { getUser, getUsers } from "../db/crud/userCrud";
+import { getUser, getUsers, createUser } from "../db/crud/userCrud";
 import { getGroup, getGroups } from "../db/crud/groupCrud";
 import { getPost, getPosts } from "../db/crud/postCrud";
 import { getActivity, getActivities } from "../db/crud/activityCrud";
@@ -16,6 +16,15 @@ const resolvers = {
     posts: (_, { group_id }) => getPosts(group_id, undefined),
     activity: (_, { activity_id }) => getActivity(activity_id),
     activities: (_, { post_id, user_id }) => getActivities(post_id, user_id),
+  },
+  Mutation: {
+    addUser: (_, { name, profile_image }) => {
+      const userObject = {
+        name,
+        profile_image,
+      };
+      return createUser(userObject);
+    },
   },
   Group: {
     async users(parent) {
