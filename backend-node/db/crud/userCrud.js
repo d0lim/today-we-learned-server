@@ -30,7 +30,8 @@ export const updateUser = async (userId, userObject) => {
   }).exec();
   if (!updatedUser) {
     console.log("Fucked when updating user");
-    return;
+    return undefined;
   }
   console.log("User Updated : ", updatedUser);
+  return updatedUser;
 };

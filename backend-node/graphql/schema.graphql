@@ -53,4 +53,5 @@ type Mutation {
   addUser(name: String!, profile_image: String): User!
   addGroup(title: String!, description: String!): Group!
   addPost(group_id: ObjectId!): Post!
+  addActivity(user_id: ObjectId!, post_id: ObjectId!, text: String!): Activity!
 }

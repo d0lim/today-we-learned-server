@@ -1,23 +1,16 @@
 import Post from "../models/Post";
 import { updateGroup, getGroup } from "./groupCrud";
 
-export const getPosts = async (_groupId, _activityId) => {
-  if (_groupId !== undefined && _activityId === undefined)
-    return await Post.find({ groupId: _groupId });
-  else if (_groupId === undefined && _activityId !== undefined)
-    return await Post.find({
-      activityId: { $elemMatch: { $eq: _activityId } },
-    });
-  else if (_groupId !== undefined && _activityId !== undefined)
-    return await Post.find({
-      groupId: _groupId,
-      activityId: { $elemMatch: { $eq: _activityId } },
-    });
+export const getPosts = async (_groupId) => {
+  if (_groupId !== undefined) return await Post.find({ groupId: _groupId });
   else return await Post.find();
 };
 
-export const getPost = async (_postId) => {
-  return await Post.findById(_postId);
+export const getPost = async (_postId, _activityId) => {
+  if (_postId !== undefined) return await Post.findById(_postId);
+  return await Post.findOne({
+    activityId: { $elemMatch: { $eq: _activityId } },
+  });
 };
 
 // Post must be made with group
@@ -59,7 +52,8 @@ export const updatePost = async (postId, postObject) => {
   }).exec();
   if (!updatedPost) {
     console.log("Fucked when updating post");
-    return;
+    return undefined;
   }
   console.log("Post Updated : ", updatedPost);
+  return updatedPost;
 };

@@ -2,7 +2,11 @@ import { ObjectIdScalar, DateScalar } from "./scalar";
 import { getUser, getUsers, createUser } from "../db/crud/userCrud";
 import { getGroup, getGroups, createGroup } from "../db/crud/groupCrud";
 import { getPost, getPosts, createPost } from "../db/crud/postCrud";
-import { getActivity, getActivities } from "../db/crud/activityCrud";
+import {
+  getActivity,
+  getActivities,
+  createActivity,
+} from "../db/crud/activityCrud";
 
 const resolvers = {
   ObjectId: ObjectIdScalar,
@@ -13,7 +17,7 @@ const resolvers = {
     group: (_, { group_id }) => getGroup(group_id, undefined),
     groups: (_, { title }) => getGroups(title, undefined),
     post: (_, { post_id }) => getPost(post_id),
-    posts: (_, { group_id }) => getPosts(group_id, undefined),
+    posts: (_, { group_id }) => getPosts(group_id),
     activity: (_, { activity_id }) => getActivity(activity_id),
     activities: (_, { post_id, user_id }) => getActivities(post_id, user_id),
   },
@@ -38,13 +42,21 @@ const resolvers = {
       };
       return createPost(postObject);
     },
+    addActivity: (_, { user_id, post_id, text }) => {
+      const activityObject = {
+        userId: user_id,
+        postId: post_id,
+        text,
+      };
+      return createActivity(activityObject);
+    },
   },
   Group: {
     async users(parent) {
       return await getUsers(parent._id);
     },
     async posts(parent) {
-      return await getPosts(parent._id, undefined);
+      return await getPosts(parent._id);
     },
   },
   User: {
@@ -69,7 +81,7 @@ const resolvers = {
       return await getUser(parent.userId);
     },
     async post(parent) {
-      return await getPosts(undefined, parent._id);
+      return await getPost(undefined, parent._id);
     },
   },
 };

@@ -25,7 +25,7 @@ export const createActivity = async (activityObject) => {
   console.log("Activity Saved :", savedActivity);
 
   const oldUser = await getUser(activityObject.userId);
-  const oldPost = await getPost(activityObject.postId);
+  const oldPost = await getPost(activityObject.postId, undefined);
   if (
     oldUser.activityId.includes(savedActivity._id) ||
     oldPost.activityId.includes(savedActivity._id)
@@ -50,8 +50,14 @@ export const createActivity = async (activityObject) => {
     date: oldPost.date,
     activityId: oldPost.activityId.concat(savedActivity._id),
   };
-  updateUser(savedActivity.userId, updatedUser);
-  updatePost(savedActivity.postId, updatedPost);
+  const userRes = await updateUser(savedActivity.userId, updatedUser);
+  const postRes = await updatePost(savedActivity.postId, updatedPost);
+  if (userRes !== undefined) {
+    if (postRes !== undefined) return savedActivity;
+    else console.log("???", userRes, postRes);
+  } else {
+    console.log("???", userRes, postRes);
+  }
 };
 
 export const updateActivity = async (activityId, activityObject) => {
