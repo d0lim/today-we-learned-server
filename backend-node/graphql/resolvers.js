@@ -1,6 +1,6 @@
 import { ObjectIdScalar, DateScalar } from "./scalar";
 import { getUser, getUsers, createUser } from "../db/crud/userCrud";
-import { getGroup, getGroups } from "../db/crud/groupCrud";
+import { getGroup, getGroups, createGroup } from "../db/crud/groupCrud";
 import { getPost, getPosts } from "../db/crud/postCrud";
 import { getActivity, getActivities } from "../db/crud/activityCrud";
 
@@ -24,6 +24,13 @@ const resolvers = {
         profile_image,
       };
       return createUser(userObject);
+    },
+    addGroup: (_, { title, description }) => {
+      const groupObject = {
+        title,
+        description,
+      };
+      return createGroup(groupObject);
     },
   },
   Group: {

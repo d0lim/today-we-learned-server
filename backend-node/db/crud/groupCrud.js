@@ -34,6 +34,7 @@ export const createGroup = async (groupObject) => {
   });
   const savedGroup = await group.save({ setDefaultsOnInsert: true });
   console.log("Group Saved :", savedGroup);
+  return savedGroup;
 };
 
 export const updateGroup = async (groupId, groupObject) => {
