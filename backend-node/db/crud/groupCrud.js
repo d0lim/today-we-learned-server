@@ -1,26 +1,23 @@
 import Group from "../models/Group";
 
 // FIXME: Not perfect condition. Need to find solution to solve.
-export const getGroups = async (_title, _userId, _postId) => {
+export const getGroups = async (_title, _userId) => {
   if (_title !== undefined && _userId === undefined)
     return await Group.find({ title: { $regex: `.*${_title}.*` } });
   else if (_title === undefined && _userId !== undefined)
     return await Group.find({ userId: { $elemMatch: { $eq: _userId } } });
-  else if (_title !== undefined && _userId !== undefined)
-    await Group.find({
+  else if (_title !== undefined && _userId !== undefined) {
+    return await Group.find({
       title: { $regex: `.*${_title}.*` },
       userId: { $elemMatch: { $eq: _userId } },
     });
-  else {
-    if (_postId !== undefined) {
-      return await Group.find({ postId: { $elemMatch: { $eq: _postId } } });
-    }
-    return await Group.find();
   }
+  return await Group.find();
 };
 
-export const getGroup = async (_groupId) => {
-  return await Group.findById(_groupId);
+export const getGroup = async (_groupId, _postId) => {
+  if (_groupId !== undefined) return await Group.findById(_groupId);
+  return await Group.findOne({ postId: { $elemMatch: { $eq: _postId } } });
 };
 
 // Group can be made itself
@@ -43,7 +40,8 @@ export const updateGroup = async (groupId, groupObject) => {
   }).exec();
   if (!updatedGroup) {
     console.log("Fucked when updating group");
-    return;
+    return undefined;
   }
   console.log("Group Updated : ", updatedGroup);
+  return updatedGroup;
 };

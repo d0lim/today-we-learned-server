@@ -44,7 +44,13 @@ export const createPost = async (postObject) => {
     userId,
     postId,
   };
-  updateGroup(groupId, updatedGroup);
+  const result = await updateGroup(groupId, updatedGroup);
+
+  if (result !== undefined) return savedPost;
+  else {
+    console.log("Fucked on postCrud.js", result);
+    return undefined;
+  }
 };
 
 export const updatePost = async (postId, postObject) => {
