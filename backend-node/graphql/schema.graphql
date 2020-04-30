@@ -39,7 +39,7 @@ type Activity {
 }
 
 type Query {
-  users(group_id: ObjectId!): [User]
+  users(group_id: ObjectId): [User]
   user(user_id: ObjectId!): User!
   groups(title: String): [Group]
   group(group_id: ObjectId!): Group!
@@ -54,4 +54,6 @@ type Mutation {
   addGroup(title: String!, description: String!): Group!
   addPost(group_id: ObjectId!): Post!
   addActivity(user_id: ObjectId!, post_id: ObjectId!, text: String!): Activity!
+
+  addUserToGroup(user_id: ObjectId!, group_id: ObjectId!): User!
 }

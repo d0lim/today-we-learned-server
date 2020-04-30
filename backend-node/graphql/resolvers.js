@@ -7,6 +7,7 @@ import {
   getActivities,
   createActivity,
 } from "../db/crud/activityCrud";
+import { addUserToGroupById } from "../db/db";
 
 const resolvers = {
   ObjectId: ObjectIdScalar,
@@ -49,6 +50,9 @@ const resolvers = {
         text,
       };
       return createActivity(activityObject);
+    },
+    addUserToGroup: (_, { user_id, group_id }) => {
+      return addUserToGroupById(user_id, group_id);
     },
   },
   Group: {

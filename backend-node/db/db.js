@@ -11,7 +11,7 @@ export const connectToMongoDB = async (password) => {
   });
 };
 
-export const addUserToGroup = async (_userId, _groupId) => {
+export const addUserToGroupById = async (_userId, _groupId) => {
   const oldUser = await getUser(_userId);
   const oldGroup = await getGroup(_groupId);
   let { name, profile_image, groupId, activityId } = oldUser;
@@ -34,6 +34,8 @@ export const addUserToGroup = async (_userId, _groupId) => {
     userId,
     postId,
   };
-  updateUser(_userId, updatedUser);
-  updateGroup(_groupId, updatedGroup);
+  const userRes = await updateUser(_userId, updatedUser);
+  const groupRes = await updateGroup(_groupId, updatedGroup);
+  if (userRes !== undefined && groupRes !== undefined) return userRes;
+  else console.log("!!!???", userRes, groupRes);
 };
