@@ -73,7 +73,6 @@ const resolvers = {
   },
   Post: {
     async group(parent) {
-      // FIXME: Need to change getGroups function in ../db/crud/groupCrud.js
       return await getGroup(undefined, parent._id);
     },
     async activities(parent) {
