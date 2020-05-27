@@ -6,4 +6,4 @@ TWL(Today We Leanred) is web app that offers a log for study group.
 
 Developing...  
 Node version works though..  
-Go version do not work.
+Go version does not work.
